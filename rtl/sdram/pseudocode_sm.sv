@@ -25,14 +25,16 @@ module sdram_sm #(
 );
 
 /*
+    RAS Timer:
+
     IDLE:
         out = 0111 (NOP)
         CKE = 1
-        if (SR timeUp):
+        if (SR timeUp & RAS delay done):
             out = 0001
             CKE = 0
             go to SR
-        else if (go):
+        else if (go  & !SR timeUp):
             out = 0010
             go to state PC
         else:
@@ -42,14 +44,13 @@ module sdram_sm #(
     PC:
         out = 0111 
         start t_RP delay
-        if (delay done):
-            if (SR timeUp):
+        if (SR timeUp  & RAS delay done):
                 go to SR
                 out = 0001
                 CKE = 0
-            else:
-                go to SMR
-                out = 0000
+        if (delay done)
+            go to SMR
+            out = 0000
         else:
             stay in PC
     
@@ -66,6 +67,7 @@ module sdram_sm #(
     BA:
         out = 0111
         start t_RCD delay
+        start t_RAS delay (global)
         if (delay done):
             if (write and write is ready):
                 go to WRITE
