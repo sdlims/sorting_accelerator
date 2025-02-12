@@ -1,7 +1,8 @@
 
 yosys -import
 
-read_verilog synth/build/rtl.sv2v.v synth/trellis_ulx3s/ulx3s.v
+read_verilog synth/build/rtl.sv2v.v
+# read_verilog synth/trellis_ulx3s/ulx3s.v
 
 synth_ecp5 -top ulx3s
 

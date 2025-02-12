@@ -1,3 +1,5 @@
+// nextpnr-ecp5 --json synth/trellis_ulx3s/build/synth.json --lpf synth/trellis_ulx3s/nextpnr_ecp5.lpf --85k --package CABGA381 --textcfg synth/trellis_ulx3s/build/ulx3s
+// sv2v synth/trellis_ulx3s/ulx3s.v rtl/top.sv third_party/basejump_stl/bsg_misc/bsg_counter_up_down.sv -w synth/build/rtl.sv2v.v 
 module ulx3s (
     input wire clkin,
     input wire reset_ni,
